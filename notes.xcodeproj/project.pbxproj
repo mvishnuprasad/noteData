@@ -26,6 +26,11 @@
 			path = Provider;
 			sourceTree = "<group>";
 		};
+		0BE94D5D2DF5720000A47900 /* Extensions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +47,7 @@
 		0BA192F92DF5473000CA98C5 = {
 			isa = PBXGroup;
 			children = (
+				0BE94D5D2DF5720000A47900 /* Extensions */,
 				0BE94D5A2DF55F0B00A47900 /* Provider */,
 				0BA193132DF5479600CA98C5 /* notes.xcdatamodeld */,
 				0BA193042DF5473000CA98C5 /* notes */,
@@ -75,6 +81,7 @@
 			fileSystemSynchronizedGroups = (
 				0BA193042DF5473000CA98C5 /* notes */,
 				0BE94D5A2DF55F0B00A47900 /* Provider */,
+				0BE94D5D2DF5720000A47900 /* Extensions */,
 			);
 			name = notes;
 			packageProductDependencies = (
