@@ -31,6 +31,15 @@ struct ContentView: View {
             print("Error \(error.localizedDescription)")
         }
     }
+    private func deleteToDoItem(_ todoItem : ToDoItem) {
+        context.delete(todoItem )
+        do {
+            
+            try context.save()
+        }catch {
+            print("Error \(error.localizedDescription)")
+        }
+    }
     private var pendingTasks: [ToDoItem] {
         todoItems.filter { toDoItem in
             !toDoItem.isCompleted
@@ -62,23 +71,41 @@ struct ContentView: View {
                     }
                 }
             List{
-                Section("Pending"){
-                    ForEach(pendingTasks){ pendingTask in
-                        
-                        ToDoCellView(todoItem: pendingTask) { item in
-                            updateItem(pendingTask)
+                if (pendingTasks.isEmpty){
+                    ContentUnavailableView("No Pending Tasks",  systemImage: "doc")
+                }else{
+                    Section("Pending"){
+                        ForEach(pendingTasks){ pendingTask in
+                            
+                            ToDoCellView(todoItem: pendingTask) { item in
+                                updateItem(pendingTask)
+                            }
+                            
+                        }.onDelete { indexSet in
+                            indexSet.forEach { index in
+                                let todoItem = pendingTasks[index]
+                                deleteToDoItem(todoItem)
+                            }
                         }
-                        
+                    }}
+                if (finishedTasks.isEmpty){
+                    ContentUnavailableView("No Pending Tasks",  systemImage: "doc")
+                }else{
+                    Section("Completed"){
+                        ForEach(finishedTasks){ finishedTask in
+                            ToDoCellView(todoItem: finishedTask) { item in
+                                updateItem(finishedTask)
+                            }
+                            
+                        }.onDelete { indexSet in
+                            indexSet.forEach { index in
+                                let todoItem = finishedTasks[index]
+                                deleteToDoItem(todoItem)
+                            }
+                        }
                     }
                 }
-                Section("Completed"){
-                    ForEach(finishedTasks){ finishedTask in
-                        ToDoCellView(todoItem: finishedTask) { item in
-                            updateItem(finishedTask)
-                        }
-                        
-                    }
-                }
+                
             }.listStyle(.plain)
             Spacer()
             
