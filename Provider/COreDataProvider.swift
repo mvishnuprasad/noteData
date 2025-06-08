@@ -19,7 +19,8 @@ class CoreDataProvider {
         // Creates 10 sample ToDoItems for preview
         for index in 1...10 {
             let todoItem = ToDoItem(context: context)
-            todoItem.title = "\(index)"
+            todoItem.title = "Item \(index)"
+            todoItem.isCompleted = index % 2 == 0 ? true: false
         }
         do {
             try context.save()
