@@ -121,7 +121,17 @@ struct ToDoCellView : View{
                     todoItem.isCompleted.toggle()
                     onChanged(todoItem)
                 }
-            Text(todoItem.title ?? "")
+            if (todoItem.isCompleted){
+                Text(todoItem.title ?? "")
+            }else{
+                TextField("", text: Binding(get: {
+                    todoItem.title ?? ""
+                }, set: { value in
+                    todoItem.title = value
+                })).onSubmit {
+                    onChanged(todoItem)
+                }
+            }
         }
     }
 }
